@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import model.Model_NhanVien;
-import view.component.Item_khuSach;
+import view.component.Item_tang;
 
 import javax.swing.ImageIcon;
 import java.awt.Color;
@@ -34,17 +34,17 @@ public class QL_CuaHang extends JPanel{
 		add(panel);
 		panel.setLayout(new GridLayout(1, 3, 50, 50));
 		
-		Item_khuSach item1 = new Item_khuSach(1);
+		Item_tang item1 = new Item_tang(1);
 		item1.getPanel().setBackground(new Color(239, 163, 163));
 		item1.getPanel().setOpaque(true);
 		panel.add(item1);
 		
-		Item_khuSach item2 = new Item_khuSach(2);
+		Item_tang item2 = new Item_tang(2);
 		item2.getPanel().setBackground(new Color(255, 237, 172));
 		item2.getPanel().setOpaque(true);
 		panel.add(item2);
 		
-		Item_khuSach item3 = new Item_khuSach(3);
+		Item_tang item3 = new Item_tang(3);
 		item3.getPanel().setBackground(new Color(255, 183, 239));
 		item3.getPanel().setOpaque(true);
 		panel.add(item3);
@@ -75,8 +75,8 @@ public class QL_CuaHang extends JPanel{
 	public void online(Model_NhanVien nhanvien, int quay) {
 		Component[] components = panel.getComponents();
 		for (Component component : components) {
-		    if (component instanceof Item_khuSach) {
-		        Item_khuSach item = (Item_khuSach) component;
+		    if (component instanceof Item_tang) {
+		        Item_tang item = (Item_tang) component;
 		        if(item.getQuay() == quay) {
 		        	item.online(nhanvien);
 		        	panel.repaint();
@@ -90,8 +90,8 @@ public class QL_CuaHang extends JPanel{
 	public void offline(int quay) {
 		Component[] components = panel.getComponents();
 		for (Component component : components) {
-		    if (component instanceof Item_khuSach) {
-		        Item_khuSach item = (Item_khuSach) component;
+		    if (component instanceof Item_tang) {
+		        Item_tang item = (Item_tang) component;
 		        if(item.getQuay() == quay) {
 		        	item.offline();
 		        	panel.repaint();

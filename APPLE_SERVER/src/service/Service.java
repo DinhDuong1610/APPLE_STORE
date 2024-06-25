@@ -2,14 +2,20 @@ package service;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,11 +37,12 @@ import view.Main;
 public class Service {
     private static Service instance;
     private ServerSocket serverSocket;
-    private final int PORT_NUMBER = 1610;
+    private final int PORT_NUMBER = 1016;
 	private ArrayList<ClientHandler> clients = new ArrayList<>();
 	private static int id = 1000000;
 	private Main main;
-	
+    private SecretKey aesKey;
+
     public static Service getInstance(Main main) {
         if (instance == null) {
             instance = new Service(main);
@@ -56,6 +63,15 @@ public class Service {
         main.getBody().getDoanhthu().loadDonMua();
         main.getBody().getThongke().thongke();
   
+        // Tạo khóa AES khi khởi động server
+        try {
+            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+            keyGen.init(256); // Khóa AES-256
+            aesKey = keyGen.generateKey();
+            System.out.println("Generated AES Key: " + Base64.getEncoder().encodeToString(aesKey.getEncoded()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public void startServer() {
@@ -69,17 +85,31 @@ public class Service {
                     try {
                         BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream() , StandardCharsets.UTF_8));
                         DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
-                        InputStream in_image = clientSocket.getInputStream();
-                        OutputStream out_image = clientSocket.getOutputStream();
-                        ClientHandler clientHandler = new ClientHandler(++id,this, in, out, clients, clientSocket);
+                        
+                        // Gửi khóa AES tới client khi kết nối
+                        sendAesKeyToClient(out);
+                        
+                        ClientHandler clientHandler = new ClientHandler(++id,this, in, out, clients, clientSocket, aesKey);
                     }
                     catch (Exception e) {
                     	clientSocket.close();
                     }
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }).start();
+    }
+    
+    private void sendAesKeyToClient(DataOutputStream out) throws IOException {
+    	try {
+    		String encodedKey = Base64.getEncoder().encodeToString(aesKey.getEncoded());
+            OutputStreamWriter writer = new OutputStreamWriter(out, StandardCharsets.UTF_8);
+            writer.write(encodedKey + "\n");
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     public void listen(ClientHandler client, String newdata) {
@@ -189,6 +219,7 @@ public class Service {
 
     		} catch (JSONException e) {
     			e.printStackTrace();
+    			e.printStackTrace();
     		}
     	}).start();
     }
@@ -199,13 +230,9 @@ public class Service {
             	client.sendMessage(jsonData);
             }
         }
-}
-    
+    }
 
 	public Main getMain() {
 		return main;
 	}
-    
-    
-    
 }

@@ -361,7 +361,7 @@ public class QL_SanPham extends JPanel{
 		bt_excel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				XMLExporter.exportSachListToXML(DBPhone.getInstance().loadPhone());
+				XMLExporter.exportPhoneListToXML(DBPhone.getInstance().loadPhone());
 			}
 		});
 		bt_excel.setIcon(new ImageIcon(QL_SanPham.class.getResource("/images/icon_export.png")));
@@ -439,8 +439,8 @@ public class QL_SanPham extends JPanel{
 		DBPhone.getInstance().suaThongTin(phone);
 	}
 	
-	public void xoaPhone(int maSach) {
-		DBPhone.getInstance().xoaPhone(maSach);
+	public void xoaPhone(int maPhone) {
+		DBPhone.getInstance().xoaPhone(maPhone);
 	}
 	
 	public void reset() {
@@ -505,12 +505,12 @@ public class QL_SanPham extends JPanel{
 	}
 	
 	public void timkiem() {
-		String tensach = tf_loc_ten.getText();
-		if(tensach.isEmpty() || tensach.equals("Nhập tên sản phẩm...")) {
+		String tenPhone = tf_loc_ten.getText();
+		if(tenPhone.isEmpty() || tenPhone.equals("Nhập tên sản phẩm...")) {
 			loadPhone();
 		}
 		else {
-			ArrayList<Model_Phone> list = DBPhone.getInstance().timkiem("%" + tensach + "%");
+			ArrayList<Model_Phone> list = DBPhone.getInstance().timkiem("%" + tenPhone + "%");
 			table_model.setRowCount(0);
 			for(Model_Phone phone : list) {
 				Object[] newRow = {phone.getId(), phone.getTen(), phone.getTheLoai(), phone.getSlTonKho(), phone.getSlDaBan(), phone.getDonGia()};        table_model.addRow(newRow);

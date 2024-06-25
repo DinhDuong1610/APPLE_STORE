@@ -238,7 +238,7 @@ public class MenuLeft extends JPanel{
 	
 	public void update(String name, int quay) {
 		lb_username.setText(name);
-		lb_quay.setText("QUẦY SỐ " + quay);
+		lb_quay.setText("TẦNG " + quay);
 	}
 	
 	public void tracuu(Model_KhachHang khachhang) {

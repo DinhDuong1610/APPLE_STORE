@@ -25,7 +25,7 @@ import EnCode.ImageUtil;
 
 public class Body extends JPanel{
 	
-	private JLayeredPane listSach;
+	private JLayeredPane listPhone;
 	private JTable table;
 	private DefaultTableModel table_model;
 
@@ -40,15 +40,15 @@ public class Body extends JPanel{
 		lb_logo.setBounds(370, 10, 442, 63);
 		add(lb_logo);
 		
-		listSach = new JLayeredPane();
-		listSach.setBackground(Color.WHITE);
-		listSach.setOpaque(true);
+		listPhone = new JLayeredPane();
+		listPhone.setBackground(Color.WHITE);
+		listPhone.setOpaque(true);
 //		layeredPane.setBounds(56, 346, 1100, 439);
-		JScrollPane scroll = new JScrollPane(listSach);
+		JScrollPane scroll = new JScrollPane(listPhone);
 		scroll.setBounds(56, 346, 1100, 439);
 		add(scroll);
 		
-		listSach.setLayout(new MigLayout("wrap 6, fillx", "30[150]10[150]10[150]10[150]10[150]10[150]30", "20[200]20"));
+		listPhone.setLayout(new MigLayout("wrap 6, fillx", "30[150]10[150]10[150]10[150]10[150]10[150]30", "20[200]20"));
 		
 		table_model = new DefaultTableModel(
 				new Object[][] {
@@ -77,10 +77,10 @@ public class Body extends JPanel{
 		
 	}
 	
-	public void addSach(Model_Phone sach) {
-		listSach.add(new Item_Phone(sach), "width 150:150:150, height 200:200:200");
-		listSach.repaint();
-		listSach.revalidate();
+	public void addPhone(Model_Phone phone) {
+		listPhone.add(new Item_Phone(phone), "width 150:150:150, height 200:200:200");
+		listPhone.repaint();
+		listPhone.revalidate();
 	}
 	
 	public void themDonMua(Model_DonMua donmua, byte[] hinhAnh) {
@@ -93,12 +93,12 @@ public class Body extends JPanel{
 		return table_model;
 	}
 
-	public JLayeredPane getListSach() {
-		return listSach;
+	public JLayeredPane getListPhone() {
+		return listPhone;
 	}
 
-	public void setListSach(JLayeredPane listSach) {
-		this.listSach = listSach;
+	public void setListPhone(JLayeredPane listPhone) {
+		this.listPhone = listPhone;
 	}
 	
 	

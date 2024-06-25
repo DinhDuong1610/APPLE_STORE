@@ -7,7 +7,7 @@ import model.Model_NhanVien;
 import java.awt.Font;
 import java.awt.Color;
 
-public class Item_khuSach extends JPanel{
+public class Item_tang extends JPanel{
 	
 	private JPanel panel;
 	private JLabel lb_nhanVienTruc;
@@ -15,7 +15,7 @@ public class Item_khuSach extends JPanel{
 	private Model_NhanVien nhanvien;
 	private int quay;
 
-	public Item_khuSach(int quay) {
+	public Item_tang(int quay) {
 		this.quay = quay;
 		setBackground(Color.WHITE);
 		setSize(280, 179);
@@ -37,14 +37,14 @@ public class Item_khuSach extends JPanel{
 		panel.add(lblNewLabel_1);
 		
 		lb_trangThai = new JLabel("Không hoạt động");
-		lb_trangThai.setIcon(new ImageIcon(Item_khuSach.class.getResource("/images/offline.png")));
+		lb_trangThai.setIcon(new ImageIcon(Item_tang.class.getResource("/images/offline.png")));
 		lb_trangThai.setForeground(Color.red);
 		lb_trangThai.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lb_trangThai.setBounds(10, 47, 260, 34);
 		panel.add(lb_trangThai);
 		
 		lb_nhanVienTruc = new JLabel("");
-		lb_nhanVienTruc.setIcon(new ImageIcon(Item_khuSach.class.getResource("/images/staff_offline.png")));
+		lb_nhanVienTruc.setIcon(new ImageIcon(Item_tang.class.getResource("/images/staff_offline.png")));
 		lb_nhanVienTruc.setForeground(new Color(35, 210, 52));
 		lb_nhanVienTruc.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lb_nhanVienTruc.setBounds(10, 133, 260, 34);
@@ -56,8 +56,8 @@ public class Item_khuSach extends JPanel{
 		lb_nhanVienTruc.setText(nhanvien.getTen());
 		lb_trangThai.setText("Đang hoạt động");
 		lb_trangThai.setForeground(new Color(35, 210, 52));
-		lb_trangThai.setIcon(new ImageIcon(Item_khuSach.class.getResource("/images/online.png")));
-		lb_nhanVienTruc.setIcon(new ImageIcon(Item_khuSach.class.getResource("/images/staff_online.png")));
+		lb_trangThai.setIcon(new ImageIcon(Item_tang.class.getResource("/images/online.png")));
+		lb_nhanVienTruc.setIcon(new ImageIcon(Item_tang.class.getResource("/images/staff_online.png")));
 	}
 	
 	public void offline() {
@@ -65,8 +65,8 @@ public class Item_khuSach extends JPanel{
 		lb_nhanVienTruc.setText("");
 		lb_trangThai.setText("Không hoạt động");
 		lb_trangThai.setForeground(Color.RED);
-		lb_trangThai.setIcon(new ImageIcon(Item_khuSach.class.getResource("/images/offline.png")));
-		lb_nhanVienTruc.setIcon(new ImageIcon(Item_khuSach.class.getResource("/images/staff_offline.png")));
+		lb_trangThai.setIcon(new ImageIcon(Item_tang.class.getResource("/images/offline.png")));
+		lb_nhanVienTruc.setIcon(new ImageIcon(Item_tang.class.getResource("/images/staff_offline.png")));
 	}
 
 	public JPanel getPanel() {

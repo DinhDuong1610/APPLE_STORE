@@ -191,7 +191,7 @@ public class DBPhone {
 	
 	public Model_Phone timkiemMaSP(int id) {
         try {
-            PreparedStatement p = con.prepareStatement(SELECT_TIMKIEM_PHONE);
+            PreparedStatement p = con.prepareStatement(SELECT_TIMKIEM_MAPHONE);
             p.setInt(1, id);
             ResultSet r = p.executeQuery();
             while (r.next()) {

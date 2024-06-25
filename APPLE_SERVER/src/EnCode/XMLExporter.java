@@ -77,7 +77,7 @@ public class XMLExporter {
         }
     }
     
-    public static void exportSachListToXML(List<Model_Phone> sachList) {
+    public static void exportPhoneListToXML(List<Model_Phone> phoneList) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Chọn nơi lưu trữ");
 
@@ -91,20 +91,20 @@ public class XMLExporter {
             if (!filePath.toLowerCase().endsWith(".xml")) {
                 filePath += ".xml"; 
             }
-            exportSachListToXML(sachList, filePath);
+            exportPhoneListToXML(phoneList, filePath);
         }
     }
 
-    private static void exportSachListToXML(List<Model_Phone> sachList, String filePath) {
+    private static void exportPhoneListToXML(List<Model_Phone> phoneList, String filePath) {
         try {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
             Document doc = docBuilder.newDocument();
-            Element rootElement = doc.createElement("sachlist");
+            Element rootElement = doc.createElement("phonelist");
             doc.appendChild(rootElement);
 
-            for (Model_Phone phone : sachList) {
+            for (Model_Phone phone : phoneList) {
                 Element phoneElement = doc.createElement("phone");
                 rootElement.appendChild(phoneElement);
 

@@ -1,6 +1,10 @@
-/dao/
-/service/
-/view/
 /EnCode/
-/model/
+/controller/
+/dao/
 /images/
+/lib/
+/model/
+/module-info.class
+/service/
+/swing/
+/view/
